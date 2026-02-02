@@ -1,0 +1,56 @@
+{
+  "env": {
+    "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+  },
+
+  "gateway": {
+    "mode": "local",
+    "bind": "lan",
+    "port": 18789,
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    },
+    "controlUi": {
+      "allowInsecureAuth": true
+    },
+    "trustedProxies": ["0.0.0.0/0"]
+  },
+
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-sonnet-4-5"
+      }
+    },
+    "list": [
+      {
+        "id": "operator",
+        "default": true,
+        "workspace": "/data/.openclaw/workspace/operator",
+        "agentDir": "/data/.openclaw/agents/operator/agent"
+      }
+    ]
+  },
+
+  "bindings": [
+    {
+      "agentId": "operator",
+      "match": {
+        "channel": "discord",
+        "peer": { "kind": "dm", "id": "DISCORD_USER_ID" }
+      }
+    }
+  ],
+
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "token": "${DISCORD_BOT_TOKEN}",
+      "dm": {
+        "policy": "allowlist",
+        "allowFrom": ["DISCORD_USER_ID"]
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "profiles": {
+    "anthropic:claude-cli": {
+      "type": "token",
+      "provider": "anthropic",
+      "token": "${ANTHROPIC_OAUTH_TOKEN}"
+    }
+  }
+}
